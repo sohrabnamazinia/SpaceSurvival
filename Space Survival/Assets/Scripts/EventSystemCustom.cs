@@ -7,11 +7,15 @@ public class EventSystemCustom : MonoBehaviour
 {
     public UnityEvent UpdateScore;
     public UnityEvent UpdateHealth;
+    public UnityEvent UpdateGameOver;
+    public float playerScore;
+    public float PlayerHealth;
 
-    void Start()
+    void Awake()
     {
         UpdateScore = new UnityEvent();
         UpdateHealth = new UnityEvent();
+        UpdateGameOver = new UnityEvent();
     }
 
 }

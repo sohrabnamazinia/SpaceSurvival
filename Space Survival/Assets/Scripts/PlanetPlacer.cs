@@ -30,8 +30,7 @@ public class PlanetPlacer : MonoBehaviour
             GameObject newInstance = getRandomPrefab();
             float InstanceX = getRandomPrefabInitialX();
             Instantiate(newInstance);
-            Debug.Log(newInstance.gameObject.name + ": " + newInstance.gameObject.transform.position.x + ", " + newInstance.gameObject.transform.position.y);
-            newInstance.transform.position = new Vector3(InstanceX, transform.position.y, transform.position.z);
+            newInstance.transform.position = new Vector3(InstanceX, 5.6f, 0f);
             timerCurrentTime = timerMaxTime;
         }
     }

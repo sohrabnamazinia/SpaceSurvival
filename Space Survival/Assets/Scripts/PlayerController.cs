@@ -44,23 +44,28 @@ public class PlayerController : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other)
     {
         var size = other.gameObject.transform.localScale;
+        if (HealthPercentage == 0) return;
 
         if (other.gameObject.CompareTag("Planet"))
         {
             HealthPercentage -= size.x * 20;
             HealthPercentage = math.max(HealthPercentage, 0);
             Destroy(other.gameObject);
+            eventSystem.PlayerHealth = HealthPercentage;
+            eventSystem.UpdateHealth.Invoke();
+            Destroy(other.gameObject);
+
             if (HealthPercentage == 0)
             {
-                // Show Text Game Over!
-                Debug.Log("Game Over!");
+                Debug.Log("GAME OVER!");
+                eventSystem.UpdateGameOver.Invoke();
                 Destroy(this.gameObject);
             }
-            eventSystem.UpdateHealth.Invoke();
         }
         else if (other.gameObject.CompareTag("Earth"))
         {
             Score += size.x * 20;
+            eventSystem.playerScore = Score;
             eventSystem.UpdateScore.Invoke();
             Destroy(other.gameObject);
         }
